@@ -1,0 +1,19 @@
+# seed.yaml — Pré-remplissage du cache MapProxy
+# Usage : mapproxy-seed -f /mapproxy/config/mapproxy.yaml -s /mapproxy/config/seed.yaml
+#
+# Attention : vérifier les CGU SHOM avant de lancer un seed massif.
+# Limiter les niveaux de zoom pour éviter une surcharge du serveur source.
+
+seeds:
+  shom_seed:
+    caches: [shom_cache]
+    levels:
+      from: 4
+      to: 12
+    coverages: [france_metro]
+
+coverages:
+  france_metro:
+    # Métropole + une marge
+    bbox: [-5.5, 41.0, 10.0, 51.5]
+    srs: EPSG:4326

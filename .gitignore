@@ -1,0 +1,5 @@
+# Tuiles mises en cache — ne pas versionner (volumineuses)
+mapproxy/cache_data/
+
+# Verrous MapProxy
+mapproxy/cache_data/locks/

@@ -1,0 +1,53 @@
+# MapProxy — Relais WMTS SHOM Raster Marine
+# Requête source : https://services.data.shom.fr/clevisu/wmts
+# Header requis : Referer: https://data.shom.fr/
+
+services:
+  wmts:
+    md:
+      title: SHOM Raster Marine Relay
+      abstract: Relais MapProxy pour le WMTS SHOM Raster Marine (EPSG:3857)
+  wms:
+    md:
+      title: SHOM Raster Marine Relay
+      abstract: Relais MapProxy pour le WMTS SHOM Raster Marine (EPSG:3857)
+    image_formats: ['image/png']
+    srs: ['EPSG:3857', 'EPSG:4326']
+  tms:
+    use_grid_names: true
+
+layers:
+  - name: RASTER_MARINE_3857
+    title: "SHOM Raster Marine (EPSG:3857)"
+    sources: [shom_cache]
+
+caches:
+  shom_cache:
+    sources: [shom_wmts_source]
+    grids: [webmercator]
+    format: image/png
+    meta_size: [4, 4]
+    cache:
+      type: file
+      directory: /mapproxy/cache_data/shom
+
+sources:
+  shom_wmts_source:
+    type: tile
+    # Variables : %(z)s=TileMatrix, %(x)s=TileCol, %(y)s=TileRow
+    url: 'https://services.data.shom.fr/clevisu/wmts?layer=RASTER_MARINE_3857_WMTS&style=normal&tilematrixset=3857&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image/png&TileMatrix=%(z)s&TileCol=%(x)s&TileRow=%(y)s'
+    grid: webmercator
+    http:
+      headers:
+        Referer: "https://data.shom.fr/"
+
+grids:
+  webmercator:
+    base: GLOBAL_WEBMERCATOR
+
+globals:
+  cache:
+    base_dir: '/mapproxy/cache_data'
+    lock_dir: '/mapproxy/cache_data/locks'
+  http:
+    ssl_no_cert_checks: false

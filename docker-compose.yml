@@ -1,0 +1,12 @@
+services:
+  mapproxy:
+    image: kartoza/mapproxy:latest
+    container_name: shom_mapproxy
+    volumes:
+      - ./mapproxy/mapproxy.yaml:/mapproxy/mapproxy.yaml:ro
+      - ./mapproxy/cache_data:/mapproxy/cache_data
+    ports:
+      - "8080:8080"
+    environment:
+      - PRODUCTION=1
+    restart: unless-stopped
