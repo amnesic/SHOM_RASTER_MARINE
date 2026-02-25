@@ -44,7 +44,6 @@ sources:
 grids:
   webmercator:
     base: GLOBAL_WEBMERCATOR
-    origin: nw
 
 globals:
   cache:
