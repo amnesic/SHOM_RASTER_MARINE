@@ -43,7 +43,16 @@ sources:
 
 grids:
   webmercator:
-    base: GLOBAL_WEBMERCATOR
+    # Grille définie from scratch en nw (XYZ/OSM convention).
+    # Ne pas utiliser base:GLOBAL_WEBMERCATOR (origin:sw) qui provoque
+    # une inversion de y lors de la récupération des tuiles SHOM (WMTS nw).
+    srs: 'EPSG:3857'
+    bbox: [-20037508.3428, -20037508.3428, 20037508.3428, 20037508.3428]
+    bbox_srs: 'EPSG:3857'
+    origin: nw
+    res_factor: 2
+    tile_size: [256, 256]
+    num_levels: 20
 
 globals:
   cache:
