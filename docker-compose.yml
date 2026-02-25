@@ -6,7 +6,7 @@ services:
       - ./mapproxy/mapproxy.yaml:/mapproxy/mapproxy.yaml:ro
       - ./mapproxy/cache_data:/mapproxy/cache_data
     ports:
-      - "8080:8080"
+      - "8090:80"
     environment:
       - PRODUCTION=1
     restart: unless-stopped
